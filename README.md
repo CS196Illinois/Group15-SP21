@@ -1,10 +1,17 @@
-# Group TEAM_NUMBER
-Group Name: TEAM_NAME
+# Group 15
+Group Name: TBD
 
-[MVP Link](http://cs196.cs.illinois.edu)
+[MVP Link](http://cs196.cs.illinois.edu) (TODO)
 
-Team Members: STUDENTS_NETIDS
+Team Members: 
+* aayala37 Alexandro Ayala
+* aegomez3 Alex Gomez
+* sbayar4 Samuel Bayard
+* thuho2 Brittany Ho
+* aymani2 Ayman Ismail
 
-Project Manager: PM_NETID
+Project Managers:
+* drshika2 Drshika Asher
+* tvitkin2 Timothy Vitkin
 
-Project Description: 
+Project Description: TBD
