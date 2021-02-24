@@ -7,7 +7,6 @@ Team Members:
 * aayala37 Alexandro Ayala
 * aegomez3 Alex Gomez
 * sbayar4 Samuel Bayard
-* thuho2 Brittany Ho
 * aymani2 Ayman Ismail
 
 Project Managers:
