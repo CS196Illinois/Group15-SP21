@@ -1,7 +1,7 @@
 # Group 15
 Group Name: Tim is Awesome
 
-[MVP Link](hhttps://docs.google.com/document/d/1MaZAegBJSnGZLHZrkQX-YI8dKIotGWnAL7dFbhcA_qQ/edit?usp=sharing) 
+[MVP Link](https://docs.google.com/document/d/1MaZAegBJSnGZLHZrkQX-YI8dKIotGWnAL7dFbhcA_qQ/edit?usp=sharing) 
 
 Team Members: 
 * aayala37 Alexandro Ayala
