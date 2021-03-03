@@ -1,7 +1,7 @@
 # Group 15
-Group Name: TBD
+Group Name: Tim is Awesome
 
-[MVP Link](http://cs196.cs.illinois.edu) (TODO)
+[MVP Link](hhttps://docs.google.com/document/d/1MaZAegBJSnGZLHZrkQX-YI8dKIotGWnAL7dFbhcA_qQ/edit?usp=sharing) 
 
 Team Members: 
 * aayala37 Alexandro Ayala
