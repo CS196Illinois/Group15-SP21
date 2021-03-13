@@ -1,0 +1,2 @@
+com/example/cs196/BuildConfig.java
+ com.example.cs196.BuildConfig
