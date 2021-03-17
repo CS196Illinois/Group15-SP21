@@ -44,7 +44,13 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../MP-Spring2021-srbayard" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RecentsManager">
+    <key name="android.template.-1932516782">
+      <recent name="TaskActivity" />
+      <recent name="" />
+    </key>
   </component>
   <component name="RunManager" selected="Android App.app">
     <configuration default="true" type="AndroidJUnit" factoryName="Android JUnit">
@@ -190,10 +196,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="79" y="93" width="1350" height="638" key="AVDManager/0.0.1536.824@0.0.1536.824" timestamp="1615416535294" />
-    <state x="498" y="150" key="FileChooserDialogImpl" timestamp="1615618768034">
+    <state x="498" y="150" key="FileChooserDialogImpl" timestamp="1615666684140">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="498" y="150" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1615618768034" />
+    <state x="498" y="150" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1615666684140" />
     <state x="277" y="57" key="SettingsEditor" timestamp="1615415891002">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
