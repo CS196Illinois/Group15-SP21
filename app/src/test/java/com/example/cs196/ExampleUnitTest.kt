@@ -1,4 +1,4 @@
-package com.example.neighborhoodtalk
+package com.example.cs196
 
 import org.junit.Test
 
