@@ -4,52 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".DashboardActivity">
 
     <EditText
-        android:id="@+id/EnterCourseName"
+        android:id="@+id/hello"
         android:layout_width="210dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="88dp"
-        android:layout_marginTop="43dp"
         android:layout_marginEnd="113dp"
         android:layout_marginBottom="546dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Course Name"
+        android:text="welcome"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/CourseAdder" />
-
-    <TextView
-        android:id="@+id/CourseAdder"
-        android:layout_width="239dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="86dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="86dp"
-        android:layout_marginBottom="41dp"
-        android:text="Course Adder"
-        android:textSize="36sp"
-        app:layout_constraintBottom_toTopOf="@+id/EnterCourseName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/AddCourse"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="91dp"
-        android:layout_marginTop="78dp"
-        android:layout_marginEnd="227dp"
-        android:layout_marginBottom="397dp"
-        android:text="Button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/EnterCourseName" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
