@@ -52,4 +52,5 @@ class ExampleAdapter(private val exampleList: List<ExampleItem>,
     interface OnItemClickListener {
         fun onItemClick(position: Int)
     }
+
 }

@@ -2,14 +2,18 @@ package com.example.cs196
 
 import android.app.Activity
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlin.random.Random
+
 
 class MainActivity : AppCompatActivity(), ExampleAdapter.OnItemClickListener {
     private val exampleList = generateDummyList(10)
@@ -21,17 +25,40 @@ class MainActivity : AppCompatActivity(), ExampleAdapter.OnItemClickListener {
         recycler_view.adapter = adapter
         recycler_view.layoutManager = LinearLayoutManager(this)
         recycler_view.setHasFixedSize(true)
+
+        val mIth = ItemTouchHelper(
+            object : ItemTouchHelper.SimpleCallback(
+                0,
+                ItemTouchHelper.RIGHT
+            ) {
+                override fun onMove(
+                    recyclerView: RecyclerView,
+                    viewHolder: ViewHolder, target: ViewHolder
+                ): Boolean {
+                    val fromPos = viewHolder.adapterPosition
+                    val toPos = target.adapterPosition
+                    // move item in `fromPos` to `toPos` in adapter.
+                    return true // true if moved, false otherwise
+                }
+
+                override fun onSwiped(viewHolder: ViewHolder, direction: Int) {
+                    // remove from adapter
+                    exampleList.removeAt(viewHolder.adapterPosition)
+
+                    // Notify adapter
+                    adapter.notifyItemRemoved(viewHolder.adapterPosition)
+                }
+            }).attachToRecyclerView(recycler_view)
+
     }
 
     fun insertItem(view: View) {
         val index = exampleList.size
-        val newItem = ExampleItem(
-            R.drawable.ic_baseline_emoji_emotions_24,
-            "Task",
-            "787878",
-            "Futuimus et sum."
-        )
-        exampleList.add(index, newItem)
+        val intent = Intent(this, CreationPage::class.java).apply {
+            putExtra("Task $index", index)
+        }
+        spot = index
+        startActivityForResult(intent, 1)
         adapter.notifyItemInserted(index)
     }
 
@@ -45,7 +72,6 @@ class MainActivity : AppCompatActivity(), ExampleAdapter.OnItemClickListener {
         adapter.notifyItemInserted(int)
     }
 
-
     fun removeItem(view: View) {
         val index = Random.nextInt(8)
         exampleList.removeAt(index)
@@ -53,7 +79,7 @@ class MainActivity : AppCompatActivity(), ExampleAdapter.OnItemClickListener {
     }
 
     override fun onItemClick(position: Int) {
-        Toast.makeText(this,"Task $position clicked", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "Task $position clicked", Toast.LENGTH_SHORT).show()
         val clickedItem = exampleList[position]
 
         val intent = Intent(this, CreationPage::class.java).apply {
@@ -62,6 +88,7 @@ class MainActivity : AppCompatActivity(), ExampleAdapter.OnItemClickListener {
         spot = position
         startActivityForResult(intent, 0)
     }
+
 
     // This method is called when the second activity finishes
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -80,14 +107,36 @@ class MainActivity : AppCompatActivity(), ExampleAdapter.OnItemClickListener {
 
                 // New item.
                 val dooblyItem = ExampleItem(
-                        R.drawable.ic_baseline_emoji_emotions_24,
-                        returnTitle,
-                        returnDate,
-                        returnDescription
+                    R.drawable.ic_baseline_emoji_emotions_24,
+                    returnTitle,
+                    returnDate,
+                    returnDescription
                 )
 
                 // Adds new task.
                 replaceItem(dooblyItem, spot)
+            }
+        }
+
+        if (requestCode == 1) {
+            if (resultCode == Activity.RESULT_OK) {
+                Log.i("AddButtonTest", "Button Got Through")
+
+                // Get String data from Intent
+                val returnTitle = data!!.getStringExtra("Title")
+                val returnDate = data!!.getStringExtra("Date")
+                val returnDescription = data!!.getStringExtra("Description")
+
+                // New item.
+                val scrooblyItem = ExampleItem(
+                    R.drawable.ic_baseline_emoji_emotions_24,
+                    returnTitle,
+                    returnDate,
+                    returnDescription
+                )
+
+                // Adds new task.
+                addItem(scrooblyItem, exampleList.size)
             }
         }
     }
