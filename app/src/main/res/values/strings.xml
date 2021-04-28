@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">cs196</string>
+    <string name="textview">TextView</string>
+    <string name="input">input</string>
 </resources>
