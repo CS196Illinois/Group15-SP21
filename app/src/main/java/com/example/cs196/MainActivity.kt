@@ -2,7 +2,9 @@ package com.example.cs196
 
 import android.app.Activity
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -11,20 +13,25 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlin.random.Random
+import java.lang.reflect.Type
 
 
 class MainActivity : AppCompatActivity(), ExampleAdapter.OnItemClickListener {
-    private val exampleList = generateDummyList(10)
+    private val exampleList = generateDummyList(5)
     private val adapter = ExampleAdapter(exampleList, this)
     private var spot = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         recycler_view.adapter = adapter
         recycler_view.layoutManager = LinearLayoutManager(this)
         recycler_view.setHasFixedSize(true)
+
+        val list: SharedPreferences = this.getSharedPreferences("Recycler List", 0)
 
         val mIth = ItemTouchHelper(
             object : ItemTouchHelper.SimpleCallback(
@@ -65,17 +72,17 @@ class MainActivity : AppCompatActivity(), ExampleAdapter.OnItemClickListener {
     public fun addItem(item: ExampleItem, int: Int) {
         exampleList.add(int, item)
         adapter.notifyItemInserted(int)
+
+        //Save list
+        saveArrayList(exampleList, "Key")
     }
 
     public fun replaceItem(item: ExampleItem, int: Int) {
         exampleList[int] = item
         adapter.notifyItemInserted(int)
-    }
 
-    fun removeItem(view: View) {
-        val index = Random.nextInt(8)
-        exampleList.removeAt(index)
-        adapter.notifyItemRemoved(index)
+        //Save list
+        saveArrayList(exampleList, "Key")
     }
 
     override fun onItemClick(position: Int) {
@@ -141,6 +148,23 @@ class MainActivity : AppCompatActivity(), ExampleAdapter.OnItemClickListener {
         }
     }
 
+    fun saveArrayList(list: java.util.ArrayList<ExampleItem>?, key: String?) {
+        val prefs: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+        val editor: SharedPreferences.Editor = prefs.edit()
+        val gson = Gson()
+        val json: String = gson.toJson(list)
+        editor.putString(key, json)
+        editor.apply()
+        Log.i("Array saved", json)
+    }
+
+//    fun getArrayList(key: String): java.util.ArrayList<ExampleItem?>? {
+//        val prefs: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+//        val gson = Gson()
+//        val json: String = prefs.getString(key, null)
+//        val type: Type = object : TypeToken<java.util.ArrayList<String?>?>() {}.getType()
+//        return gson.fromJson(json, type)
+//    }
 
 
     private fun generateDummyList(size: Int): ArrayList<ExampleItem> {
