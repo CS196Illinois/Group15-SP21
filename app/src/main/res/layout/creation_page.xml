@@ -26,12 +26,18 @@
         android:text="Date Due"
         android:textSize="25dp"
         />
-    <EditText
-        android:id="@+id/edit_text_date"
+<!--    <EditText-->
+<!--        android:id="@+id/edit_text_date"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:hint="XX/XX/XXXX"-->
+<!--        />-->
+    <DatePicker
+        android:id="@+id/edit_date"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="XX/XX/XXXX"
-        />
+        android:layout_height="300dp"
+        >
+    </DatePicker>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

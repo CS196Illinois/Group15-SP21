@@ -2,4 +2,4 @@ package com.example.cs196
 
 import java.util.*
 
-data class ExampleItem(var imageResource: Int, var task: String, var date: String, var description: String)
+data class ExampleItem(var imageResource: Int, var task: String, var dateString: String, var description: String, var date: Date)
