@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.preference.PreferenceManager
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -13,10 +12,9 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.activity_main.*
-import java.lang.reflect.Type
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class MainActivity : AppCompatActivity(), ExampleAdapter.OnItemClickListener {
@@ -34,28 +32,28 @@ class MainActivity : AppCompatActivity(), ExampleAdapter.OnItemClickListener {
         val list: SharedPreferences = this.getSharedPreferences("Recycler List", 0)
 
         val mIth = ItemTouchHelper(
-            object : ItemTouchHelper.SimpleCallback(
-                0,
-                ItemTouchHelper.RIGHT
-            ) {
-                override fun onMove(
-                    recyclerView: RecyclerView,
-                    viewHolder: ViewHolder, target: ViewHolder
-                ): Boolean {
-                    val fromPos = viewHolder.adapterPosition
-                    val toPos = target.adapterPosition
-                    // move item in `fromPos` to `toPos` in adapter.
-                    return true // true if moved, false otherwise
-                }
+                object : ItemTouchHelper.SimpleCallback(
+                        0,
+                        ItemTouchHelper.RIGHT
+                ) {
+                    override fun onMove(
+                            recyclerView: RecyclerView,
+                            viewHolder: ViewHolder, target: ViewHolder
+                    ): Boolean {
+                        val fromPos = viewHolder.adapterPosition
+                        val toPos = target.adapterPosition
+                        // move item in `fromPos` to `toPos` in adapter.
+                        return true // true if moved, false otherwise
+                    }
 
-                override fun onSwiped(viewHolder: ViewHolder, direction: Int) {
-                    // remove from adapter
-                    exampleList.removeAt(viewHolder.adapterPosition)
+                    override fun onSwiped(viewHolder: ViewHolder, direction: Int) {
+                        // remove from adapter
+                        exampleList.removeAt(viewHolder.adapterPosition)
 
-                    // Notify adapter
-                    adapter.notifyItemRemoved(viewHolder.adapterPosition)
-                }
-            }).attachToRecyclerView(recycler_view)
+                        // Notify adapter
+                        adapter.notifyItemRemoved(viewHolder.adapterPosition)
+                    }
+                }).attachToRecyclerView(recycler_view)
 
     }
 
@@ -74,7 +72,7 @@ class MainActivity : AppCompatActivity(), ExampleAdapter.OnItemClickListener {
         adapter.notifyItemInserted(int)
 
         //Save list
-        saveArrayList(exampleList, "Key")
+        //saveArrayList(exampleList, "Key")
     }
 
     public fun replaceItem(item: ExampleItem, int: Int) {
@@ -82,7 +80,7 @@ class MainActivity : AppCompatActivity(), ExampleAdapter.OnItemClickListener {
         adapter.notifyItemInserted(int)
 
         //Save list
-        saveArrayList(exampleList, "Key")
+        //saveArrayList(exampleList, "Key")
     }
 
     override fun onItemClick(position: Int) {
@@ -109,16 +107,24 @@ class MainActivity : AppCompatActivity(), ExampleAdapter.OnItemClickListener {
 
                 // Get String data from Intent
                 val returnTitle = data!!.getStringExtra("Title")
-                val returnDate = data!!.getStringExtra("Date")
+                val returnDateString = data!!.getStringExtra("Date")
                 val returnDescription = data!!.getStringExtra("Description")
+                val returnDate = Date()
+                returnDate.setTime(data!!.getLongExtra("date", -1))
+                val day: Int = returnDate.day
+                val month: Int = returnDate.month
+                val year: Int = returnDate.year - 100
+                val dateString = month.toString() + "/" + day.toString() + "/" + year.toString()
 
                 // New item.
                 val dooblyItem = ExampleItem(
-                    R.drawable.ic_baseline_emoji_emotions_24,
-                    returnTitle,
-                    returnDate,
-                    returnDescription
-                )
+                        R.drawable.ic_baseline_emoji_emotions_24,
+                        returnTitle,
+                        dateString,
+                        returnDescription,
+                        returnDate
+
+                        )
 
                 // Adds new task.
                 replaceItem(dooblyItem, spot)
@@ -131,15 +137,20 @@ class MainActivity : AppCompatActivity(), ExampleAdapter.OnItemClickListener {
 
                 // Get String data from Intent
                 val returnTitle = data!!.getStringExtra("Title")
-                val returnDate = data!!.getStringExtra("Date")
                 val returnDescription = data!!.getStringExtra("Description")
-
+                val returnDate = Date()
+                returnDate.setTime(data!!.getLongExtra("date", -1))
+                val day: Int = returnDate.day
+                val month: Int = returnDate.month
+                val year: Int = returnDate.year - 100
+                val dateString = month.toString() + "/" + day.toString() + "/" + year.toString()
                 // New item.
                 val scrooblyItem = ExampleItem(
-                    R.drawable.ic_baseline_emoji_emotions_24,
-                    returnTitle,
-                    returnDate,
-                    returnDescription
+                        R.drawable.ic_baseline_emoji_emotions_24,
+                        returnTitle,
+                        dateString,
+                        returnDescription,
+                        returnDate
                 )
 
                 // Adds new task.
@@ -148,15 +159,15 @@ class MainActivity : AppCompatActivity(), ExampleAdapter.OnItemClickListener {
         }
     }
 
-    fun saveArrayList(list: java.util.ArrayList<ExampleItem>?, key: String?) {
-        val prefs: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
-        val editor: SharedPreferences.Editor = prefs.edit()
-        val gson = Gson()
-        val json: String = gson.toJson(list)
-        editor.putString(key, json)
-        editor.apply()
-        Log.i("Array saved", json)
-    }
+//    fun saveArrayList(list: java.util.ArrayList<ExampleItem>?, key: String?) {
+//        val prefs: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+//        val editor: SharedPreferences.Editor = prefs.edit()
+//        val gson = Gson()
+//        val json: String = gson.toJson(list)
+//        editor.putString(key, json)
+//        editor.apply()
+//        Log.i("Array saved", json)
+//    }
 
 //    fun getArrayList(key: String): java.util.ArrayList<ExampleItem?>? {
 //        val prefs: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
@@ -169,11 +180,12 @@ class MainActivity : AppCompatActivity(), ExampleAdapter.OnItemClickListener {
 
     private fun generateDummyList(size: Int): ArrayList<ExampleItem> {
         val list = ArrayList<ExampleItem>()
+        val date = Date()
         for (i in 0 until size) {
             val drawable = when (i % 1) {
                 else -> R.drawable.ic_baseline_emoji_emotions_24
             }
-            val item = ExampleItem(drawable, "Task $i", "454545", "Ibsum et macilum de epistulae.")
+            val item = ExampleItem(drawable, "Task $i", "454545", "Ibsum et macilum de epistulae.", date)
             list += item
         }
         return list

@@ -23,7 +23,7 @@ class ExampleAdapter(private val exampleList: List<ExampleItem>,
         holder.imageView.setImageResource(currentItem.imageResource)
         holder.textView1.text = currentItem.task
         holder.textView2.text = currentItem.description
-        holder.textView3.text = currentItem.date
+        holder.textView3.text = currentItem.dateString
     }
 
     override fun getItemCount() = exampleList.size
