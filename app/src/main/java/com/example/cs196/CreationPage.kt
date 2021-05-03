@@ -35,6 +35,7 @@ class CreationPage : AppCompatActivity() {
         var edit_text_date = edit_date.toString()
         var edit_date_full = getDateFromDatePicker(edit_date)
 
+
         //Inserting data.
         Log.i("Add course ended", edit_text_date)
         val intent = Intent()
