@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent" android:layout_height="wrap_content">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clipToPadding="true"
-        android:padding="8dp">
+        android:padding="8dp"
+        >
 
         <ImageView
             android:id="@+id/image_view"
@@ -20,10 +21,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toEndOf="@id/image_view"
+            android:fontFamily="@font/abril_fatface"
             android:text="Task 1"
-            android:textColor="@android:color/holo_red_dark"
+            android:textColor="@color/black"
             android:textSize="25sp"
-            android:textStyle="bold" />
+            android:textStyle="normal" />
 
         <TextView
             android:id="@+id/text_view_3"
@@ -31,9 +33,11 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/text_view_1"
             android:layout_toEndOf="@id/image_view"
+            android:fontFamily="@font/belgrano"
             android:text="Task Time and Date"
-            android:textColor="@android:color/holo_red_dark"
-            android:textSize="20sp" />
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/text_view_2"
@@ -41,9 +45,11 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/text_view_3"
             android:layout_toEndOf="@id/image_view"
+            android:fontFamily="@font/belgrano"
             android:text="Description"
             android:textColor="@android:color/holo_red_dark"
-            android:textSize="15sp" />
+            android:textSize="15sp"
+            android:textStyle="bold" />
 
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

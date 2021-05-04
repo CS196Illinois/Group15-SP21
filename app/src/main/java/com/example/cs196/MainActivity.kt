@@ -15,10 +15,11 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 import kotlin.collections.ArrayList
+import kotlin.random.Random.Default.nextInt
 
 
 class MainActivity : AppCompatActivity(), ExampleAdapter.OnItemClickListener {
-    private val exampleList = generateDummyList(5)
+    private val exampleList = generateDummyList(10)
     private val adapter = ExampleAdapter(exampleList, this)
     private var spot = 0
 
@@ -59,6 +60,7 @@ class MainActivity : AppCompatActivity(), ExampleAdapter.OnItemClickListener {
 
     fun insertItem(view: View) {
         val index = exampleList.size
+        //examplelist.size
         val intent = Intent(this, CreationPage::class.java).apply {
             putExtra("Task $index", index)
         }
@@ -182,7 +184,9 @@ class MainActivity : AppCompatActivity(), ExampleAdapter.OnItemClickListener {
         val list = ArrayList<ExampleItem>()
         val date = Date()
         for (i in 0 until size) {
-            val drawable = when (i % 1) {
+            val drawable = when (i % 5) {
+                0 -> R.drawable.ic_happy
+                1 -> R.drawable.ic_smile
                 else -> R.drawable.ic_baseline_emoji_emotions_24
             }
             val item = ExampleItem(drawable, "Task $i", "454545", "Ibsum et macilum de epistulae.", date)
