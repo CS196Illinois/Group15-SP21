@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.provider.CalendarContract
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 import kotlin.collections.ArrayList
@@ -146,6 +148,7 @@ class MainActivity : AppCompatActivity(), ExampleAdapter.OnItemClickListener {
                 val month: Int = returnDate.month
                 val year: Int = returnDate.year - 100
                 val dateString = month.toString() + "/" + day.toString() + "/" + year.toString()
+                val date = year.toString() + month.toString() + day.toString()
                 // New item.
                 val scrooblyItem = ExampleItem(
                         R.drawable.ic_baseline_emoji_emotions_24,
@@ -155,8 +158,29 @@ class MainActivity : AppCompatActivity(), ExampleAdapter.OnItemClickListener {
                         returnDate
                 )
 
+                /**part of backend to add google calendar events
+                 */
+                //val date2 : Long = 1620178182000
+                val intent = Intent(Intent.ACTION_INSERT)
+                intent.setData(CalendarContract.Events.CONTENT_URI)
+                intent.putExtra(CalendarContract.Events.TITLE, returnTitle)
+                intent.putExtra(CalendarContract.Events.DESCRIPTION, returnDescription)
+                intent.putExtra(CalendarContract.Events.ALL_DAY, true)
+                intent.putExtra(CalendarContract.Events.DTSTART, Calendar.getInstance().timeInMillis + 60*60*1000)
+                startActivity(intent)
+
                 // Adds new task.
                 addItem(scrooblyItem, exampleList.size)
+
+                /**part of backend to send the data to firebase
+                 */
+                val ref = FirebaseDatabase.getInstance().getReference("tasks")
+                val taskID = ref.push().key.toString()
+                //val t = ExampleItem(0, returnTitle, dateString, returnDescription, returnDate)
+                val t = ExampleItem2(returnTitle, dateString, returnDescription)
+
+                ref.child(taskID).setValue(t)
+
             }
         }
     }
@@ -178,7 +202,6 @@ class MainActivity : AppCompatActivity(), ExampleAdapter.OnItemClickListener {
 //        val type: Type = object : TypeToken<java.util.ArrayList<String?>?>() {}.getType()
 //        return gson.fromJson(json, type)
 //    }
-
 
     private fun generateDummyList(size: Int): ArrayList<ExampleItem> {
         val list = ArrayList<ExampleItem>()
