@@ -2,55 +2,71 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/creator"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#DABFBF"
     android:orientation="vertical"
     android:padding="16dp"
-    android:id="@+id/creator"
     tools:context="com.example.cs196.CreationPage">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#EDAAAA"
+        android:drawableTint="#982E2E"
+        android:fontFamily="@font/kanit"
+        android:foregroundTint="#000000"
+        android:gravity="center"
+        android:padding="1dp"
+        android:text="Task Attributes"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="#151515"
+        android:textSize="36sp"
+        android:textStyle="normal" />
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Task Title"
-        android:textSize="25dp"
-        />
+        android:textSize="25dp" />
+
     <EditText
         android:id="@+id/edit_text_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Task Title"
         android:inputType="text" />
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Date Due"
-        android:textSize="25dp"
-        />
-<!--    <EditText-->
-<!--        android:id="@+id/edit_text_date"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:hint="XX/XX/XXXX"-->
-<!--        />-->
+        android:textSize="25dp" />
+    <!--    <EditText-->
+    <!--        android:id="@+id/edit_text_date"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:hint="XX/XX/XXXX"-->
+    <!--        />-->
     <DatePicker
         android:id="@+id/edit_date"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        >
-    </DatePicker>
+        android:layout_height="300dp"></DatePicker>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Description"
-        android:textSize="25dp"
-        />
+        android:textSize="25dp" />
+
     <EditText
         android:id="@+id/edit_text_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Description"
-        android:inputType="textMultiLine"
-        />
+        android:inputType="textMultiLine" />
 
     <LinearLayout
         android:id="@+id/button"
@@ -59,6 +75,7 @@
         android:layout_alignParentBottom="true"
         android:clipToPadding="true"
         android:padding="4dp">
+
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
